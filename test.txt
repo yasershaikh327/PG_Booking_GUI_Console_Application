@@ -1,0 +1,232 @@
+import java.util.Scanner;
+import java.io.*;
+
+public class User
+{
+	
+  String fname, lname ,address, state, city, email_id, password, cpass;
+  char gender;
+  Integer ph_no;
+  String log_email, log_pass;
+  Scanner sc=new Scanner(System.in);
+
+  public void UserMenu()
+  {
+    
+     while (true)
+     {
+      int ch;
+      System.out.println("\nChoose the Following Operations");
+      System.out.println("1.Register\n");
+      System.out.println("2.LOG IN\n");
+      System.out.println("3.Main Menu\n");
+      ch=sc.nextInt();
+
+      //Switch case to display switch Operations
+      switch(ch)
+      {
+        case 1:
+          registration();
+        break;
+
+        case 2:
+          login();
+        break;
+
+        case 3:
+          System.out.print("Going back to Main Menu");
+          Main.main(null);
+        break;
+        
+        default:
+        System.out.println("Invalid Choice");
+      }
+    }
+    
+  }
+  
+  
+
+  public void registration()
+	{
+	  	
+	  	try 
+	  	{
+	  		//Writing Data into File
+	  		BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ANIS\\Desktop\\Goa University\\Sem 3\\CS306\\MiniProject\\registered_details.txt"));
+
+	  		System.out.println("Enter the following details to Register Yourself: \n");
+	
+		    System.out.println("Enter your First Name: ");
+		    fname = sc.next();
+		    bw.write("First Name: " +fname);
+		
+		    System.out.println("\nEnter your Last Name: ");
+		    lname = sc.next();
+		     bw.write("\nLast Name: "+lname);
+		
+		    System.out.println("\nEnter your Gender M[Male] OR F[Female]: ");
+		    gender = sc.next().charAt(0);
+		    bw.write("\nGender: "+gender);
+		
+		    System.out.println("\nEnter your Phone number: ");
+		    ph_no = sc.nextInt();
+		    bw.write("\nPhone No: "+ph_no);
+		
+		    System.out.println("\nEnter your Address: ");
+		    address = sc.next();
+		    bw.write("\nAddress: "+address);
+		
+		    System.out.println("\nEnter your State: ");
+		    state = sc.next();
+		    bw.write("\nState: "+state);
+		
+		    System.out.println("\nEnter your City: ");
+		    city = sc.next();
+		     bw.write("\nCity: "+city);
+		
+		    System.out.println("\nEnter your Email ID: ");
+		    email_id = sc.next();
+		    log_email = email_id;
+		    bw.write("\nEmail ID: \n"+email_id);
+		
+		    System.out.println("\nEnter Password: ");
+		    password = sc.next();
+		    bw.write("\nPassword: \n"+password);
+		
+		    System.out.println("\nConfirm your Password: ");
+		    cpass = sc.next();
+		    log_pass = password;
+		    
+		    bw.close();
+	  	}
+	  	catch (Exception e) 
+        {
+            System.out.println("File OR Location Not Found!!\n");
+        }       
+	
+		//Check if Passoword and Confirm Password Matches Or Not
+		while(!password.equals(cpass))
+		{
+			System.out.println("Please Re-Enter Confirm Password");
+			cpass = sc.next();
+		}
+	}
+
+  public void display_details()
+  {
+//    System.out.println("\n" + fname + " Your Registered Details are: ");
+//    System.out.println("\n First NAME: " + fname);
+//    System.out.println("\n Last NAME: " + lname);
+//    System.out.println("\n Gender: " + gender);
+//    System.out.println("\n Phone Number: " + ph_no);
+//    System.out.println("\n Address: " + address);
+//    System.out.println("\n State: " + state);
+//    System.out.println("\n City: " + city);
+//    System.out.println("\n Email ID: " + email_id);
+//    System.out.println("\n Password: " + password);
+	  
+	  try
+	  {
+		  BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ANIS\\Desktop\\Goa University\\Sem 3\\CS306\\MiniProject\\registered_details.txt"));
+	      String str;
+	      
+//	      Scanner scan = new Scanner(br);
+	      
+	      //To Read whole data from the File
+          while((str = br.readLine()) != null)
+          {
+               System.out.println(str);
+          }
+	      
+	  }
+	  catch (Exception e) 
+      {
+          System.out.println("File OR Location Not Found!!\n");
+      }       
+	  
+    
+  } 
+
+  public void login()
+  {
+		System.out.println("\n\nLogin Process...");
+		 
+		String fname,lname,gender,phno,add,state,city,email,str,em, password,str1,pass;
+		
+		try 
+		{
+			BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ANIS\\Desktop\\Goa University\\Sem 3\\CS306\\MiniProject\\registered_details.txt"));
+		
+			Scanner scan = new Scanner(br);
+	
+	        // To read the data Line by Line from the File
+	        fname = scan.nextLine();
+	        lname = scan.nextLine();
+	        gender = scan.nextLine();
+	        phno = scan.nextLine();
+	        add = scan.nextLine();
+	        state = scan.nextLine();
+	        city = scan.nextLine();
+	        str = scan.nextLine();
+	        em = scan.nextLine();
+	        str1 = scan.nextLine();
+	        pass = scan.nextLine();
+			
+		    System.out.print("\nEnter Your Email_Id: ");
+		    email = sc.next();
+		
+		    System.out.print("\nEnter Your Password: ");
+		    password = sc.next();
+		
+		    while(!email.equals(em))
+		    {
+		      System.out.println("\nPlease Re-Enter Your Email ID ");
+		      email = sc.next();
+		    }
+		
+		    while(!password.equals(pass))
+		    {
+		      System.out.println("\nPlease Enter Correct Password ");
+		      password = sc.next();
+		    }
+		
+		    System.out.print("\nLOG IN Successfull ");
+		}
+		catch (Exception e) 
+	    {
+	        System.out.println("File OR Location Not Found!!\n");
+	    }      
+		
+	
+	    
+		while(true)
+	    {
+	      int ch;
+	      System.out.println("\nChoose the Following Operations");
+	      System.out.println("1.View My Details");
+	      System.out.println("2.Main Menu");
+	      ch=sc.nextInt();
+	
+	      //Switch case to display switch Operations
+	      switch(ch)
+	      {
+	        case 1:
+	        display_details();
+	        break;
+	
+	        case 2:
+	          Main.main(null);
+	        break;
+	
+	        default:
+	        System.out.println("Invalid Choice");
+	      }
+	    }
+    
+  }
+
+  
+
+
+}
